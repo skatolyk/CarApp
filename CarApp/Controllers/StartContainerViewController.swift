@@ -48,7 +48,7 @@ class StartContainerViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        roundedView.addTopRoundedEdge(desiredCurve: 1.1)
+        self.configureRoundedView()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -103,6 +103,17 @@ class StartContainerViewController: UIViewController {
         self.view.addGestureRecognizer(swipeDown)
     }
     
+    func configureRoundedView() {
+        let gradient = CAGradientLayer()
+        gradient.frame.size = self.roundedView.frame.size
+        
+        gradient.colors = [UIColor(displayP3Red: 31/255, green: 134/255, blue: 211/255, alpha: 1).cgColor,
+                           UIColor(displayP3Red: 19/255, green: 106/255, blue: 173/255, alpha: 1).cgColor]
+        self.roundedView.layer.insertSublayer(gradient, at: 0)
+        
+        self.roundedView.addTopRoundedEdge(desiredCurve: 1.1)
+    }
+
     @objc private func roundedViewAnimation() {
         if roundedViewBootomConstraint.constant == 0 {
             self.hideView(self.datePickerView, showView: self.dateView)

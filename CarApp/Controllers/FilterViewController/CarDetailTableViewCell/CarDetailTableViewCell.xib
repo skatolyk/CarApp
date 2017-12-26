@@ -34,7 +34,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="tfb-MD-7za">
                                 <rect key="frame" x="0.0" y="40.5" width="185.5" height="24"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VeC-pP-1H7">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VeC-pP-1H7">
                                         <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="VeC-pP-1H7" secondAttribute="height" multiplier="1:1" id="6ML-q2-j9t"/>
@@ -54,7 +54,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="R6G-vf-w1g">
                                 <rect key="frame" x="0.0" y="64.5" width="185.5" height="24"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j5q-od-dC1">
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="car_door" translatesAutoresizingMaskIntoConstraints="NO" id="j5q-od-dC1">
                                         <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="j5q-od-dC1" secondAttribute="height" multiplier="1:1" id="8t6-iW-fdE"/>
@@ -74,7 +74,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Y2v-rh-4xE">
                                 <rect key="frame" x="0.0" y="88.5" width="185.5" height="24"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uma-zH-4vo">
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_black" translatesAutoresizingMaskIntoConstraints="NO" id="Uma-zH-4vo">
                                         <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Uma-zH-4vo" secondAttribute="height" multiplier="1:1" id="swG-5c-KQG"/>
@@ -94,7 +94,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="bbX-Wy-FD8">
                                 <rect key="frame" x="0.0" y="112.5" width="185.5" height="24"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="79h-o5-g0E">
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="snowflake" translatesAutoresizingMaskIntoConstraints="NO" id="79h-o5-g0E">
                                         <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="79h-o5-g0E" secondAttribute="height" multiplier="1:1" id="tZv-yt-7eF"/>
@@ -119,19 +119,6 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ek-bX-8wz" customClass="RoundView" customModule="CarApp" customModuleProvider="target">
-                        <rect key="frame" x="396" y="13" width="12" height="12"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="8Ek-bX-8wz" secondAttribute="height" multiplier="1:1" id="Bim-cH-9Bd"/>
-                        </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="isRoundView" value="YES"/>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                <integer key="value" value="1"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Jp-qm-fGu">
                         <rect key="frame" x="411" y="11" width="33" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -141,22 +128,28 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bv2-zL-p9W">
                         <rect key="frame" x="-50" y="11" width="185.5" height="136.5"/>
                     </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="radius_of_circle" translatesAutoresizingMaskIntoConstraints="NO" id="yMF-ko-uOW">
+                        <rect key="frame" x="393" y="12" width="14" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="yMF-ko-uOW" secondAttribute="height" multiplier="1:1" id="eab-4d-RcE"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="bv2-zL-p9W" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="2:5" id="8lF-MV-oUw"/>
                     <constraint firstItem="bv2-zL-p9W" firstAttribute="top" secondItem="WHj-Jr-9Kd" secondAttribute="top" id="Byr-fe-47S"/>
+                    <constraint firstItem="5Jp-qm-fGu" firstAttribute="leading" secondItem="yMF-ko-uOW" secondAttribute="trailing" constant="4" id="HEd-F3-Sdg"/>
                     <constraint firstItem="bv2-zL-p9W" firstAttribute="bottom" secondItem="WHj-Jr-9Kd" secondAttribute="bottom" id="ILK-GZ-crz"/>
                     <constraint firstItem="5Jp-qm-fGu" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="Ivf-xF-vcG"/>
+                    <constraint firstItem="yMF-ko-uOW" firstAttribute="top" secondItem="5Jp-qm-fGu" secondAttribute="top" constant="1" id="LZ1-O7-GoQ"/>
                     <constraint firstItem="WHj-Jr-9Kd" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="2:5" id="Ooy-s8-vO6"/>
                     <constraint firstItem="WHj-Jr-9Kd" firstAttribute="leading" secondItem="bv2-zL-p9W" secondAttribute="trailing" constant="16" id="Prv-UE-eZO"/>
                     <constraint firstItem="saN-bD-IaS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Tul-GG-sHJ"/>
                     <constraint firstItem="bv2-zL-p9W" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="-50" id="XfC-hS-eaE"/>
                     <constraint firstAttribute="bottom" secondItem="WHj-Jr-9Kd" secondAttribute="bottom" constant="4" id="acx-DV-8fV"/>
                     <constraint firstItem="saN-bD-IaS" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="b0N-KF-fNP"/>
-                    <constraint firstItem="8Ek-bX-8wz" firstAttribute="bottom" secondItem="5Jp-qm-fGu" secondAttribute="bottom" constant="-2" id="bVZ-UH-W63"/>
                     <constraint firstItem="5Jp-qm-fGu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="eHj-aL-8I4"/>
-                    <constraint firstItem="5Jp-qm-fGu" firstAttribute="leading" secondItem="8Ek-bX-8wz" secondAttribute="trailing" constant="3" id="h1T-4a-SVc"/>
-                    <constraint firstItem="8Ek-bX-8wz" firstAttribute="top" secondItem="5Jp-qm-fGu" secondAttribute="top" constant="2" id="sEG-C7-FlA"/>
+                    <constraint firstItem="yMF-ko-uOW" firstAttribute="bottom" secondItem="5Jp-qm-fGu" secondAttribute="bottom" constant="-1" id="eNS-5U-6CB"/>
                     <constraint firstItem="WHj-Jr-9Kd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="sRn-FP-XgX"/>
                 </constraints>
             </tableViewCellContentView>
@@ -174,4 +167,10 @@
             <point key="canvasLocation" x="19" y="33"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="car_door" width="16" height="14"/>
+        <image name="radius_of_circle" width="14" height="14"/>
+        <image name="snowflake" width="12" height="14"/>
+        <image name="user_black" width="12" height="15"/>
+    </resources>
 </document>
