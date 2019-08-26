@@ -8,37 +8,37 @@
 
 import UIKit
 
-class CarDetailViewController: BaseNavigationViewController {
+final class CarDetailViewController: BaseNavigationViewController {
 
-    @IBOutlet weak var roundedView: UIView!
-    @IBOutlet weak var carImageView: UIImageView!
+    @IBOutlet private weak var roundedView: UIView!
+    @IBOutlet private weak var carImageView: UIImageView!
     
-    @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var carTypeLabel: UILabel!
-    @IBOutlet weak var doorsNumberLabel: UILabel!
-    @IBOutlet weak var seatsNumberLabel: UILabel!
-    @IBOutlet weak var conditioningLabel: UILabel!
-    @IBOutlet weak var companyNameLabel: UILabel!
+    @IBOutlet private weak var priceLabel: UILabel!
+    @IBOutlet private weak var carTypeLabel: UILabel!
+    @IBOutlet private weak var doorsNumberLabel: UILabel!
+    @IBOutlet private weak var seatsNumberLabel: UILabel!
+    @IBOutlet private weak var conditioningLabel: UILabel!
+    @IBOutlet private weak var companyNameLabel: UILabel!
     
-    @IBOutlet weak var overviewLabel: UITextViewFixed!
-    @IBOutlet weak var bookButton: UIButton!
+    @IBOutlet private weak var overviewLabel: UITextViewFixed!
+    @IBOutlet private weak var bookButton: UIButton!
     
     var model: CarModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.carImageView.image = model?.carImage()
+        carImageView.image = model?.carImage()
         
-        self.titleLabel.text = model?.carName
-        self.carTypeLabel.text = model?.carTypeString()
-        self.doorsNumberLabel.text = model?.doorsString()
-        self.seatsNumberLabel.text = model?.seatsString()
-        self.conditioningLabel.text = model?.conditioningString()
-        self.priceLabel.text = model?.priceString()
-        self.companyNameLabel.text = model?.company
-        self.overviewLabel.text = model?.overview
+        titleLabel.text = model?.carName
+        carTypeLabel.text = model?.carTypeString()
+        doorsNumberLabel.text = model?.doorsString()
+        seatsNumberLabel.text = model?.seatsString()
+        conditioningLabel.text = model?.conditioningString()
+        priceLabel.text = model?.priceString()
+        companyNameLabel.text = model?.company
+        overviewLabel.text = model?.overview
         
-        self.bookButton.setTitle("BOOK WITH \(model?.company.uppercased() ?? "")", for: .normal)
+        bookButton.setTitle("BOOK WITH \(model?.company.uppercased() ?? "")", for: .normal)
     }
     
     override func viewDidLayoutSubviews() {
@@ -46,8 +46,8 @@ class CarDetailViewController: BaseNavigationViewController {
         roundedView.addBottomRoundedEdge(desiredCurve: 2)
     }
 
-    @IBAction func bookButtonPressed(_ sender: Any) {
-        self.present(UIAlertController.functionallityError(), animated: true, completion: nil)
+    @IBAction private func bookButtonPressed(_ sender: Any) {
+        present(UIAlertController.functionallityError(), animated: true, completion: nil)
     }
     
 }

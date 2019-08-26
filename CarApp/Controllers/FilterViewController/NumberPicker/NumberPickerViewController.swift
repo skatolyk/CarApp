@@ -30,42 +30,44 @@ class NumberPickerViewController: UIViewController {
         if let number = initNumber, let index = elements.index(of: number) {
             picker.selectRow(index + 1, inComponent: 0, animated: false)
         }
-        self.view = picker
+        view = picker
     }
 
 }
 
+// MARK: - UIPickerViewDataSource
 extension NumberPickerViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        guard self.pickerTitle != nil else {
+        guard pickerTitle != nil else {
             return 1
         }
         return 2
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return component == 0 ? self.elements.count + 1 : 1
+        return component == 0 ? elements.count + 1 : 1
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 1 {
-            return self.pickerTitle
+            return pickerTitle
         } else {
             if row == 0 {
                 return "All"
             } else {
-                return String(self.elements[row - 1])
+                return String(elements[row - 1])
             }
         }
     }
 }
 
+// MARK: - UIPickerViewDelegate
 extension NumberPickerViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if row > 0 {
-            self.delegate?.numberPickerCoose(self.elements[row - 1])
+            delegate?.numberPickerCoose(elements[row - 1])
         } else {
-            self.delegate?.numberPickerCoose(nil)
+            delegate?.numberPickerCoose(nil)
         }
     }
 }

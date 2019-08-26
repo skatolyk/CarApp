@@ -8,11 +8,11 @@
 
 import SideMenu
 
-class SideMenuConfiguration {
+struct SideMenuConfiguration {
 
     static let sideMenuManager = SideMenuManager.default
     
-    class func configure() {
+    static func configure() {
         sideMenuManager.menuPresentMode = .menuSlideIn
         sideMenuManager.menuFadeStatusBar = false
         
@@ -25,7 +25,7 @@ class SideMenuConfiguration {
         sideMenuManager.menuLeftNavigationController = storyboard.instantiateViewController(withIdentifier: "LeftMenuNavigationController") as? UISideMenuNavigationController
     }
     
-    class func menuController() -> MenuViewController? {
+    static var menuController: MenuViewController? {
         return sideMenuManager.menuLeftNavigationController?.topViewController as? MenuViewController
     }
 

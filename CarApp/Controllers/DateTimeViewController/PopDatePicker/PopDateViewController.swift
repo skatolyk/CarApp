@@ -14,13 +14,13 @@ protocol DatePickerViewControllerDelegate: class {
 
 class PopDateViewController: UIViewController {
     
-    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet private weak var datePicker: UIDatePicker!
     
     weak var delegate: DatePickerViewControllerDelegate?
 
     var currentDate: Date? {
         didSet {
-            self.updatePickerCurrentDate()
+            updatePickerCurrentDate()
         }
     }
 
@@ -29,17 +29,17 @@ class PopDateViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        self.datePicker.datePickerMode = .dateAndTime
-        self.datePicker.minimumDate = Date()
+        datePicker.datePickerMode = .dateAndTime
+        datePicker.minimumDate = Date()
         updatePickerCurrentDate()
     }
     
     private func updatePickerCurrentDate() {
-        self.datePicker?.date = self.currentDate ?? Date()
+        datePicker?.date = currentDate ?? Date()
     }
     
-    @IBAction func okAction(_ sender: AnyObject) {
-        self.delegate?.datePickerChoosed(self.datePicker.date)
-        self.dismiss(animated: true, completion: nil)
+    @IBAction private func okAction(_ sender: AnyObject) {
+        delegate?.datePickerChoosed(datePicker.date)
+        dismiss(animated: true, completion: nil)
     }
 }

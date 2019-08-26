@@ -8,14 +8,14 @@
 
 import UIKit
 
-class MenuTabViewController: BaseNavigationViewController {
+final class MenuTabViewController: BaseNavigationViewController {
     
-    @IBOutlet weak var centralLabel: UILabel!
+    @IBOutlet private weak var centralLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.titleLabel.text = self.title
-        self.centralLabel.text = self.title
+        titleLabel.text = title
+        centralLabel.text = title
     }
 
 }

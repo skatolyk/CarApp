@@ -12,9 +12,9 @@ protocol MainViewControllerDelegate: class {
     func segue(to viewController: FilterViewController)
 }
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     
-    @IBOutlet weak var menuStackView: UIStackView!
+    @IBOutlet private weak var menuStackView: UIStackView!
     
     weak var delegate: MainViewControllerDelegate?
     
@@ -23,32 +23,33 @@ class MainViewController: UIViewController {
         
         let menuStackViewGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showMenu))
         
-        self.menuStackView.addGestureRecognizer(menuStackViewGestureRecognizer)
+        menuStackView.addGestureRecognizer(menuStackViewGestureRecognizer)
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(showMenu))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
-        self.view.addGestureRecognizer(swipeRight)
+        view.addGestureRecognizer(swipeRight)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationVC = segue.destination as? FilterViewController {
-            self.delegate?.segue(to: destinationVC)
+            delegate?.segue(to: destinationVC)
         }
     }
     
     @objc private func showMenu() {
         if let leftMenu = SideMenuManager.default.menuLeftNavigationController {
-            self.present(leftMenu, animated: true, completion: nil)
+            present(leftMenu, animated: true, completion: nil)
         }
     }
     
-    @IBAction func userButtonPressed(_ sender: Any) {
-        self.present(UIAlertController.functionallityError(), animated: true, completion: nil)
+    @IBAction private func userButtonPressed(_ sender: Any) {
+        present(UIAlertController.functionallityError(), animated: true, completion: nil)
     }
 }
 
+// MARK: - ChildCarFilterViewController
 extension MainViewController: ChildCarFilterViewController {
     func findCars() {
-        self.performSegue(withIdentifier: "toFilterVC", sender: self)
+        performSegue(withIdentifier: "toFilterVC", sender: self)
     }
 }

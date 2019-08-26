@@ -13,7 +13,7 @@ protocol CarFilterCoordinatorDelegate: class {
     func menuChoosed(component: String)
 }
 
-class CarFilterCoordinator: Coordinator {
+final class CarFilterCoordinator: Coordinator {
 
     weak var delegate: CarFilterCoordinatorDelegate?
     
@@ -22,37 +22,40 @@ class CarFilterCoordinator: Coordinator {
     
     init(presenter: UINavigationController) {
         self.presenter = presenter
-        self.mainViewController = MainViewController.instantiateViewController()
-        self.mainViewController.delegate = self
+        mainViewController = MainViewController.instantiateViewController()
+        mainViewController.delegate = self
     }
     
     func start() {
-        SideMenuConfiguration.menuController()?.delegate = self
-        self.presenter.setViewControllers([mainViewController], animated: true)
+        SideMenuConfiguration.menuController?.delegate = self
+        presenter.setViewControllers([mainViewController], animated: true)
     }
     
     func findCars() {
-        if let childCarViewController = self.presenter.topViewController as? ChildCarFilterViewController {
+        if let childCarViewController = presenter.topViewController as? ChildCarFilterViewController {
             childCarViewController.findCars()
         }
     }
     
 }
 
+// MARK: - MainViewControllerDelegate
 extension CarFilterCoordinator: MainViewControllerDelegate {
     func segue(to viewController: FilterViewController) {
         viewController.delegate = self
     }
 }
 
+// MARK: - FilterViewControllerDelegate
 extension CarFilterCoordinator: FilterViewControllerDelegate {
     func choosedCar(_ carModel: CarModel) {
-        self.delegate?.choosedCar(carModel)
+        delegate?.choosedCar(carModel)
     }
 }
 
+// MARK: - MenuViewControllerDelegate
 extension CarFilterCoordinator: MenuViewControllerDelegate {
     func menuChoosed(component: String) {
-        self.delegate?.menuChoosed(component: component)
+        delegate?.menuChoosed(component: component)
     }
 }

@@ -8,29 +8,29 @@
 
 import UIKit
 
-class CarDetailTableViewCell: UITableViewCell {
+final class CarDetailTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var carImageView: UIImageView!
+    @IBOutlet private weak var carImageView: UIImageView!
     
-    @IBOutlet weak var carNameLabel: UILabel!
-    @IBOutlet weak var carTypeLabel: UILabel!
-    @IBOutlet weak var doorsNumberLabel: UILabel!
-    @IBOutlet weak var seatsNumberLabel: UILabel!
-    @IBOutlet weak var conditioningLabel: UILabel!
-    @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet private weak var carNameLabel: UILabel!
+    @IBOutlet private weak var carTypeLabel: UILabel!
+    @IBOutlet private weak var doorsNumberLabel: UILabel!
+    @IBOutlet private weak var seatsNumberLabel: UILabel!
+    @IBOutlet private weak var conditioningLabel: UILabel!
+    @IBOutlet private weak var distanceLabel: UILabel!
+    @IBOutlet private weak var priceLabel: UILabel!
     
     var model: CarModel? {
         didSet {
-            self.carImageView.image = model?.carImage()
+            carImageView.image = model?.carImage()
             
-            self.carNameLabel.text = model?.carName
-            self.carTypeLabel.text = model?.carTypeString()
-            self.doorsNumberLabel.text = model?.doorsString()
-            self.seatsNumberLabel.text = model?.seatsString()
-            self.conditioningLabel.text = model?.conditioningString()
-            self.distanceLabel.text = model?.distanceString()
-            self.priceLabel.text = model?.priceString()
+            carNameLabel.text = model?.carName
+            carTypeLabel.text = model?.carTypeString()
+            doorsNumberLabel.text = model?.doorsString()
+            seatsNumberLabel.text = model?.seatsString()
+            conditioningLabel.text = model?.conditioningString()
+            distanceLabel.text = model?.distanceString()
+            priceLabel.text = model?.priceString()
         }
     }
     

@@ -12,10 +12,10 @@ protocol MenuViewControllerDelegate: class {
     func menuChoosed(component: String)
 }
 
-class MenuViewController: UIViewController {
+final class MenuViewController: UIViewController {
 
-    @IBOutlet weak var userImage: UIImageView!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var userImage: UIImageView!
+    @IBOutlet private weak var tableView: UITableView!
     
     weak var delegate: MenuViewControllerDelegate?
     
@@ -24,7 +24,7 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        self.dataSource = [MenuCellModel(label: "History", imageName: "history"),
+        dataSource = [MenuCellModel(label: "History", imageName: "history"),
                       MenuCellModel(label: "Current orders", imageName: "current_orders"),
                       MenuCellModel(label: "Promos", imageName: "promos"),
                       MenuCellModel(label: "Payments", imageName: "payments"),
@@ -32,32 +32,34 @@ class MenuViewController: UIViewController {
                       MenuCellModel(label: "Updates", imageName: "updates"),
                       MenuCellModel(label: "Purchases", imageName: "purchases")]
         
-        self.tableView.register(cell: MenuTableViewCell.self)
-        self.userImage.roundBorderView()
+        tableView.register(cell: MenuTableViewCell.self)
+        userImage.roundBorderView()
     }
 
 }
 
+// MARK: - UITableViewDataSource
 extension MenuViewController: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataSource.count
+        return dataSource.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: MenuTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         
-        cell.model = self.dataSource[indexPath.row]
+        cell.model = dataSource[indexPath.row]
         
         return cell
     }
 }
 
+// MARK: - UITableViewDelegate
 extension MenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let choosedModel = self.dataSource[indexPath.row]
+        let choosedModel = dataSource[indexPath.row]
         
-        self.dismiss(animated: true) {
-            self.delegate?.menuChoosed(component: choosedModel.label)
+        dismiss(animated: true) { [weak self] in
+            self?.delegate?.menuChoosed(component: choosedModel.label)
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

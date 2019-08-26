@@ -27,7 +27,7 @@ extension UIViewController {
     
     static func instantiateViewController<T: UIViewController>(_ bundle: Bundle? = nil) -> T {
         let sb = UIStoryboard.main()
-        return sb.instantiateViewController(withIdentifier: self.identifier) as! T
+        return sb.instantiateViewController(withIdentifier: identifier) as! T
     }
 }
 
@@ -63,7 +63,7 @@ extension UITableView {
     }
     
     func register<T: UITableViewCell>(cell: T.Type) {
-        self.register(T.nib(), forCellReuseIdentifier: T.identifier)
+        register(T.nib(), forCellReuseIdentifier: T.identifier)
     }
 }
 

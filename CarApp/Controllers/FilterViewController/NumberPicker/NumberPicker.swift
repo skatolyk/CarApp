@@ -18,21 +18,21 @@ class NumberPicker: NSObject {
     var title: String?
     
     public init(for view: UIView, with elements: [Int]) {
-        self.numberPickerVC = NumberPickerViewController()
-        self.numberPickerVC.elements = elements
-        self.sourceView = view
+        numberPickerVC = NumberPickerViewController()
+        numberPickerVC.elements = elements
+        sourceView = view
         super.init()
     }
     
     public func pick(_ inViewController: UIViewController,
                      initNumber: Int?, title: String?, numberChanged: @escaping NumberPickerCallback) {
-        self.numberPickerVC.delegate = self
-        self.numberPickerVC.modalPresentationStyle = .popover
-        self.numberPickerVC.preferredContentSize = CGSize(width: 500, height: 208)
-        self.numberPickerVC.initNumber = initNumber
-        self.numberPickerVC.pickerTitle = title
+        numberPickerVC.delegate = self
+        numberPickerVC.modalPresentationStyle = .popover
+        numberPickerVC.preferredContentSize = CGSize(width: 500, height: 208)
+        numberPickerVC.initNumber = initNumber
+        numberPickerVC.pickerTitle = title
         
-        if let popover = self.numberPickerVC.popoverPresentationController {
+        if let popover = numberPickerVC.popoverPresentationController {
             popover.permittedArrowDirections = .up
             popover.sourceView = sourceView
             popover.sourceRect = CGRect(x: sourceView.bounds.size.width / 2,
@@ -40,11 +40,12 @@ class NumberPicker: NSObject {
                                         width: 0, height: 0)
             popover.delegate = self
             self.numberChanged = numberChanged
-            inViewController.present(self.numberPickerVC, animated: true, completion: nil)
+            inViewController.present(numberPickerVC, animated: true, completion: nil)
         }
     }
 }
 
+// MARK: - UIPopoverPresentationControllerDelegate
 extension NumberPicker: UIPopoverPresentationControllerDelegate {
     public func adaptivePresentationStyle(for controller: UIPresentationController,
                                           traitCollection: UITraitCollection) -> UIModalPresentationStyle {
@@ -52,8 +53,9 @@ extension NumberPicker: UIPopoverPresentationControllerDelegate {
     }
 }
 
+// MARK: - NumberPickerViewControllerDelegate
 extension NumberPicker: NumberPickerViewControllerDelegate {
     func numberPickerCoose(_ number: Int?) {
-        self.numberChanged?(number)
+        numberChanged?(number)
     }
 }

@@ -12,15 +12,15 @@ protocol FilterViewControllerDelegate: class {
     func choosedCar(_ carModel: CarModel)
 }
 
-class FilterViewController: BaseNavigationViewController {
+final class FilterViewController: BaseNavigationViewController {
 
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var seatsButton: UIButton!
-    @IBOutlet weak var distanceButton: UIButton!
-    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var seatsButton: UIButton!
+    @IBOutlet private weak var distanceButton: UIButton!
+    @IBOutlet private weak var nameTextField: UITextField!
     
-    @IBOutlet weak var searchViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var searchViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var tableViewTopConstraint: NSLayoutConstraint!
     
     weak var delegate: FilterViewControllerDelegate?
     
@@ -30,11 +30,11 @@ class FilterViewController: BaseNavigationViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.allCars = self.hardcodeModels()
-        self.dataSource = self.allCars
+        allCars = hardcodeModels()
+        dataSource = allCars
         
-        self.tableView.register(cell: CarDetailTableViewCell.self)
-        self.tableView.tableFooterView = UIView()
+        tableView.register(cell: CarDetailTableViewCell.self)
+        tableView.tableFooterView = UIView()
     }
     
     private func hardcodeModels() -> [CarModel] { // TODO: Hardcode!! Remove it!
@@ -54,26 +54,26 @@ class FilterViewController: BaseNavigationViewController {
     
     private func refreshSearchView() {
         if tableViewTopConstraint.constant == 0 {
-            self.tableViewTopConstraint.constant += searchViewHeightConstraint.constant
+            tableViewTopConstraint.constant += searchViewHeightConstraint.constant
         } else {
-//            self.seatsButton.setTitle("Seats: All", for: .normal)
-//            self.distanceButton.setTitle("Distance: All", for: .normal)
-//            self.nameTextField.text = ""
-            self.tableViewTopConstraint.constant = 0
+//            seatsButton.setTitle("Seats: All", for: .normal)
+//            distanceButton.setTitle("Distance: All", for: .normal)
+//            nameTextField.text = ""
+            tableViewTopConstraint.constant = 0
         }
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.view.layoutIfNeeded()
         }
     }
     
     private func setSeatsButtonTitle(_ seats: Int?) {
         let str = seats != nil ? seats.pureDesc : "All"
-        self.seatsButton.setTitle("Seats: \(str)", for: .normal)
+        seatsButton.setTitle("Seats: \(str)", for: .normal)
     }
     
     private func setDistanceButtonTitle(_ distance: Int?) {
         let str = distance != nil ? distance.pureDesc : "All"
-        self.distanceButton.setTitle("Distance: \(str)", for: .normal)
+        distanceButton.setTitle("Distance: \(str)", for: .normal)
     }
     
     private func number(from button: UIButton) -> Int? {
@@ -83,51 +83,57 @@ class FilterViewController: BaseNavigationViewController {
         return nil
     }
     
-    @IBAction func magnifyGlasButtonPressed(_ sender: Any) {
-        self.refreshSearchView()
+    @IBAction private func magnifyGlasButtonPressed(_ sender: Any) {
+        refreshSearchView()
     }
     
-    @IBAction func distanceButtonPressed(_ sender: UIButton) {
-        self.numberPicker = NumberPicker(for: sender, with: hardcodeDistance())
+    @IBAction private func distanceButtonPressed(_ sender: UIButton) {
+        numberPicker = NumberPicker(for: sender, with: hardcodeDistance())
         
-        self.numberPicker?.pick(self,
-                                initNumber: number(from: self.distanceButton),
-                                title: "km") { [unowned self] (distance) in
-            self.setDistanceButtonTitle(distance)
+        numberPicker?.pick(self,
+                           initNumber: number(from: distanceButton),
+                           title: "km") { [weak self] (distance) in
+            self?.setDistanceButtonTitle(distance)
         }
     }
     
-    @IBAction func seatsButtonPressed(_ sender: UIButton) {
-        self.numberPicker = NumberPicker(for: sender, with: hardcodeSeats())
+    @IBAction private func seatsButtonPressed(_ sender: UIButton) {
+        numberPicker = NumberPicker(for: sender, with: hardcodeSeats())
         
-        self.numberPicker?.pick(self,
-                                initNumber: number(from: self.seatsButton),
-                                title: "seats") { [unowned self] (seats) in
-            self.setSeatsButtonTitle(seats)
+        numberPicker?.pick(self,
+                           initNumber: number(from: seatsButton),
+                           title: "seats") { [weak self] (seats) in
+            self?.setSeatsButtonTitle(seats)
         }
     }
     
-    @IBAction func searchButtonPressed(_ sender: Any) {
-        self.dataSource = self.allCars.filter { [unowned self] in
-            if let number = number(from: self.distanceButton), $0.distance(more: number) {
+    @IBAction private func searchButtonPressed(_ sender: Any) {
+        dataSource = allCars.filter { [weak self] in
+            if let number = self?.number(from: distanceButton), $0.distance(more: number) {
                 return false
             }
             
-            if let number = number(from: self.seatsButton), $0.contains(seats: number) == false {
+            if let number = self?.number(from: seatsButton), $0.contains(seats: number) == false {
                 return false
             }
             
-            if let carName = self.nameTextField?.text?.lowercased(), carName.isEmpty == false {
+            if let carName = self?.nameTextField?.text?.lowercased(), carName.isEmpty == false {
                 return $0.carName.lowercased().contains(carName)
             }
             return true
         }
-        self.refreshSearchView()
-        self.tableView.reloadData()
+        refreshSearchView()
+        tableView.reloadData()
     }
     
 }
 
+// MARK: - IBActions
+extension FilterViewController {
+    
+}
+
+// MARK: - UITableViewDataSource
 extension FilterViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
@@ -136,22 +142,24 @@ extension FilterViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CarDetailTableViewCell = tableView.dequeueReusableCell(for: indexPath)
 
-        cell.model = self.dataSource[indexPath.row]
+        cell.model = dataSource[indexPath.row]
         cell.contentView.backgroundColor = indexPath.row % 2 == 1 ? .cellLightGray : .white
         
         return cell
     }
 }
 
+// MARK: - UITableViewDelegate
 extension FilterViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.delegate?.choosedCar(self.dataSource[indexPath.row])
+        delegate?.choosedCar(dataSource[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
+// MARK: - ChildCarFilterViewController
 extension FilterViewController: ChildCarFilterViewController {
     func findCars() {
-        self.present(UIAlertController.functionallityError(), animated: true, completion: nil)
+        present(UIAlertController.functionallityError(), animated: true, completion: nil)
     }
 }

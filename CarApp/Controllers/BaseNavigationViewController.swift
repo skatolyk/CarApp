@@ -10,10 +10,9 @@ import UIKit
 
 class BaseNavigationViewController: UIViewController {
 
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet internal weak var titleLabel: UILabel!
     
-    @IBAction func backButtonPressed(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+    @IBAction private func backButtonPressed(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
-
 }

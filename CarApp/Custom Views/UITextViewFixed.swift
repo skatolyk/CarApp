@@ -15,7 +15,7 @@ import UIKit
     }
     
     func setup() {
-        textContainerInset = UIEdgeInsets.zero
+        textContainerInset = .zero
         textContainer.lineFragmentPadding = 0
     }
 }

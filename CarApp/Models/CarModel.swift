@@ -70,14 +70,14 @@ struct CarModel {
     }
     
     func contains(doors: Int) -> Bool {
-        return self.doorsNumber == doors
+        return doorsNumber == doors
     }
     
     func contains(seats: Int) -> Bool {
-        return self.seatsNumber == seats
+        return seatsNumber == seats
     }
     
     func distance(more distance: Int) -> Bool {
-        return self.distance < distance
+        return distance < distance
     }
 }

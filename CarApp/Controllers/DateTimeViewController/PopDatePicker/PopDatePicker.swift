@@ -19,7 +19,7 @@ public class PopDatePicker: NSObject {
     
     public init(for view: UIView) {
         datePickerVC = PopDateViewController()
-        self.sourceView = view
+        sourceView = view
         super.init()
     }
     
@@ -44,6 +44,7 @@ public class PopDatePicker: NSObject {
     }
 }
 
+// MARK: - UIPopoverPresentationControllerDelegate
 extension PopDatePicker: UIPopoverPresentationControllerDelegate {
     public func adaptivePresentationStyle(for controller: UIPresentationController,
                                           traitCollection: UITraitCollection) -> UIModalPresentationStyle {
@@ -51,8 +52,9 @@ extension PopDatePicker: UIPopoverPresentationControllerDelegate {
     }
 }
 
+// MARK: - DatePickerViewControllerDelegate
 extension PopDatePicker: DatePickerViewControllerDelegate {
     func datePickerChoosed(_ date: Date?) {
-        self.dataChanged?(date, sourceView)
+        dataChanged?(date, sourceView)
     }
 }

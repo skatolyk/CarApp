@@ -11,12 +11,12 @@ import UIKit
 @IBDesignable class RoundView: UIView {
     @IBInspectable var isRoundView: Bool = false {
         didSet {
-            self.roundView(self.isRoundView)
+            roundView(isRoundView)
         }
     }
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        self.roundView(self.isRoundView)
+        roundView(isRoundView)
     }
 }

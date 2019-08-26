@@ -6,10 +6,15 @@ DEPENDENCIES:
   - SideMenu
   - SnapKit
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SideMenu
+    - SnapKit
+
 SPEC CHECKSUMS:
   SideMenu: 47dbf9e4d878062d8994aed43f6e4bf6c1fea30b
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
 PODFILE CHECKSUM: 0c80ae7403712de23598bc734b82c87ae84fe688
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.5.3

@@ -12,23 +12,23 @@ protocol DateTimeViewControllerDelegate: class {
     func dateTimePressed(_ sender: DateTimeViewController)
 }
 
-class DateTimeViewController: UIViewController {
+final class DateTimeViewController: UIViewController {
 
-    @IBOutlet weak var dateDayLabel: UILabel!
-    @IBOutlet weak var weekDayLabel: UILabel!
-    @IBOutlet weak var monthLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet private weak var dateDayLabel: UILabel!
+    @IBOutlet private weak var weekDayLabel: UILabel!
+    @IBOutlet private weak var monthLabel: UILabel!
+    @IBOutlet private weak var timeLabel: UILabel!
     
     var date: Date? {
         didSet {
-            let choosedDate = self.date ?? Date()
+            let choosedDate = date ?? Date()
             
-            self.dateDayLabel.text = choosedDate.day
-            self.weekDayLabel.text = choosedDate.weekDay
-            self.monthLabel.text = choosedDate.month
-            self.timeLabel.text = choosedDate.time
+            dateDayLabel.text = choosedDate.day
+            weekDayLabel.text = choosedDate.weekDay
+            monthLabel.text = choosedDate.month
+            timeLabel.text = choosedDate.time
             
-            self.dependenceLabel?.text = choosedDate.fullDate
+            dependenceLabel?.text = choosedDate.fullDate
         }
     }
     
@@ -39,13 +39,13 @@ class DateTimeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.date = Date()
+        date = Date()
         
         let dateGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dateAreaTapped))
-        self.view.addGestureRecognizer(dateGestureRecognizer)
+        view.addGestureRecognizer(dateGestureRecognizer)
     }
 
     @objc private func dateAreaTapped() {
-        self.delegate?.dateTimePressed(self)
+        delegate?.dateTimePressed(self)
     }
 }

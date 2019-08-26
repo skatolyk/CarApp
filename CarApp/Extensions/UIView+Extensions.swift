@@ -11,21 +11,21 @@ import UIKit
 extension UIView {
     
     func roundBorderView() {
-        self.roundView()
-        self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor.white.cgColor
+        roundView()
+        layer.borderWidth = 1.0
+        layer.borderColor = UIColor.white.cgColor
         
     }
     
     func roundView(_ round: Bool = true) {
-        self.layer.masksToBounds = !round
-        self.layer.cornerRadius = round ? self.frame.size.width / 2 : 0
-        self.clipsToBounds = round
+        layer.masksToBounds = !round
+        layer.cornerRadius = round ? frame.size.width / 2 : 0
+        clipsToBounds = round
     }
     
     func addTopRoundedEdge(desiredCurve: CGFloat) {
         // Call this function in viewDidLayoutSubviews for correct work
-        let offset = self.frame.width / desiredCurve
+        let offset = frame.width / desiredCurve
         let bounds = self.bounds
         
         let rectBounds = CGRect(x: bounds.origin.x,
@@ -47,12 +47,12 @@ extension UIView {
         maskLayer.path = rectPath.cgPath
         
         // Set the newly created shape layer as the mask for the view's layer
-        self.layer.mask = maskLayer
+        layer.mask = maskLayer
     }
     
     func addBottomRoundedEdge(desiredCurve: CGFloat) {
         // Call this function in viewDidLayoutSubviews for correct work
-        let offset = self.frame.width / desiredCurve
+        let offset = frame.width / desiredCurve
         let bounds = self.bounds
         
         let rectBounds = CGRect(x: bounds.origin.x,
@@ -74,6 +74,6 @@ extension UIView {
         maskLayer.path = rectPath.cgPath
         
         // Set the newly created shape layer as the mask for the view's layer
-        self.layer.mask = maskLayer
+        layer.mask = maskLayer
     }
 }
